@@ -1,0 +1,24 @@
+name: xs
+
+on:
+  schedule:
+    - cron: '0 7 11 3 *'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update
+        run: |
+          cp wd xtravpn110
+
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Bot"
+          git add xtravpn110
+          git commit -m "Update"
+          git push
